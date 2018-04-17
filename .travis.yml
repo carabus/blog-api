@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: DxpHlbs9WCclrzpZ5bF4uCykdVJUNiuxw4iOZJfRn6dREokElz2BS8peIW7uwiX+J4NZ17Q0pmFfKwhuNUexpItQKs52yUFYMLEVSKP5h9Tb8HfXP6JPR/gZZJAXuDGrUGBkf93jSa+6A6549wTCKqT3Lijil7KyIml9hgKA9sy8x8lxSA5iu5mtgtHQU9ToiOT+Ddl0fW9arK1fKM0MyYoftJz3NX2KiQcZvFkehde9qc1BFYXkkEPfndKSOhApYGuuY+ff4hS07NuPvl7fUHRFEh/NaU0IEsJMmZet1RWIQFHZ03HpVQmFvePns/Ez5ecBCDEIS1SCt4ok1pQTV7pWhQb/DhgeBLlJYkZ5oYz/Jdm9gzL8erC7BABBOWYXAaEv5/otNbS+503IgMzCH/ow7G0oJ7PfF8R706T5ly+90s+u4I6Bv0jcT9vnqZW/V28FmWeVWK47/VG5UqWCEVaQc9bvRNlRkz49JbbnKuzoCCryJnRFqWpyHWSXTIUNBhpI5F3HgVW/SpFrmVX6burq0bklX9VST3/r3CU+ijPZzGhWONRKEIuwWAuSc/YgkgIbYarnqCmYo+8uNQucQpyeCXnaw3vDXG4hQli99TQezmJ+uSO8tS5YAaWyDwt9wdw9S5smRYkm+DnqF82swRcV4wagU5m3/5ZJPUbUFa4=
+  app: dry-tor-45263
+  on:
+    repo: carabus/blog-api
