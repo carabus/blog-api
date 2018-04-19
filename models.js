@@ -10,22 +10,23 @@ let blogPostsSchema = mongoose.Schema(
       firstName: String,
       lastName: String
     }
-  }
-  /*{ timestamps: { createdAt: "created" } }*/
+  },
+  { timestamps: { createdAt: "created" } }
 );
 
 blogPostsSchema.set("collection", "blogPosts");
-// virtual for author
-//blogPostsSchema.virtual('authorComplete').get(function(){
-//  return `${this.author.firstName} ${this.author.lastName}`.trim();
-//});
+//virtual for author
+blogPostsSchema.virtual("authorComplete").get(function() {
+  return `${this.author.firstName} ${this.author.lastName}`.trim();
+});
 
 blogPostsSchema.methods.serialize = function() {
   return {
     id: this._id,
     title: this.title,
-    content: this.content
-    //author: this.authorComplete
+    content: this.content,
+    author: this.authorComplete,
+    created: this.created
   };
 };
 
