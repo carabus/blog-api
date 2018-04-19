@@ -10,7 +10,7 @@ const blogPostsRouter = require("./blogPostsRouter");
 
 // log the http layer
 app.use(morgan("common"));
-const { PORT, DATABASE_URL } = require("./settings");
+const { PORT, DATABASE_URL } = require("./config");
 
 // when requests come into `/blogs`
 // we'll route them to the express
