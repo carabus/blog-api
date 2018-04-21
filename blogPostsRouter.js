@@ -6,12 +6,12 @@ const jsonParser = bodyParser.json();
 
 const { BlogPosts } = require("./models");
 
-router.get("/", (req, res) => {
+router.get("/", jsonParser, (req, res) => {
   BlogPosts.find()
     .limit(20)
     .then(results => {
       res.json({
-        results: results.map(blogPost => blogPost.serialize())
+        results: results.map((blogPost) => blogPost.serialize())
       });
     })
     .catch(err => {
@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
 });
 
 // can also request by ID
-router.get("/:id", (req, res) => {
+router.get("/:id", jsonParser, (req, res) => {
   BlogPosts
     // this is a convenience method Mongoose provides for searching
     // by the object _id property
