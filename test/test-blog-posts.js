@@ -115,6 +115,37 @@ describe("Blog Posts API", function() {
     });
   });
 
+  describe('POST endpoint', function() {
+    it('should add a new blog post', function() {
+
+      const newBlogPost = generateBlogPostData();
+
+      return chai.request(app)
+        .post('/blogPosts')
+        .send(newBlogPost)
+        .then(function(res) {
+          expect(res).to.have.status(201);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.include.keys(
+            'id', 'title', 'content', 'author', 'created');
+          expect(res.body.title).to.equal(newBlogPost.title);
+          // cause Mongo should have created id on insertion
+          expect(res.body.id).to.not.be.null;
+          expect(res.body.content).to.equal(newBlogPost.content);
+          expect(res.body.author).to.equal(`${newBlogPost.author.firstName} ${newBlogPost.author.lastName}`);
+
+          return BlogPosts.findById(res.body.id);
+        })
+        .then(function(blogPost) {
+          expect(blogPost.title).to.equal(newBlogPost.title);
+          expect(blogPost.content).to.equal(newBlogPost.content);
+          expect(blogPost.author.firstName).to.equal(newBlogPost.author.firstName);
+          expect(blogPost.author.lastName).to.equal(newBlogPost.author.lastName);
+        });
+    });
+  });
+
   describe('PUT endpoint', function() {
 
     it('should update fields you send over', function() {
