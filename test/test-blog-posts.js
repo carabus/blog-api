@@ -115,12 +115,38 @@ describe("Blog Posts API", function() {
     });
   });
 
+  describe('PUT endpoint', function() {
+
+    it('should update fields you send over', function() {
+      const updateData = {
+        title: 'fofofofofofofof',
+        content: 'futuristic fusion'
+      };
+
+      return BlogPosts
+        .findOne()
+        .then(function(blogPost) {
+          updateData.id = blogPost.id;
+
+          // make request then inspect it to make sure it reflects
+          // data we sent
+          return chai.request(app)
+            .put(`/blogPosts/${blogPost.id}`)
+            .send(updateData);
+        })
+        .then(function(res) {
+          expect(res).to.have.status(204);
+
+          return BlogPosts.findById(updateData.id);
+        })
+        .then(function(blogPost) {
+          expect(blogPost.title).to.equal(updateData.title);
+          expect(blogPost.content).to.equal(updateData.content);
+        });
+    });
+  });
+
   describe('DELETE endpoint', function() {
-    // strategy:
-    //  1. get a restaurant
-    //  2. make a DELETE request for that restaurant's id
-    //  3. assert that response has right status code
-    //  4. prove that restaurant with the id doesn't exist in db anymore
     it('delete a blog post by id', function() {
 
       let blogPost;

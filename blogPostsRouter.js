@@ -85,7 +85,7 @@ router.put('/:id', jsonParser, (req, res) => {
   BlogPosts
     // all key/value pairs in toUpdate will be updated -- that's what `$set` does
     .findByIdAndUpdate(req.params.id, { $set: toUpdate })
-    .then(blogPost => res.status(200).json(blogPost.serialize()))
+    .then(blogPost => res.status(204).end())
     .catch(err => res.status(500).json({ message: 'Internal server error' }));
 });
 
